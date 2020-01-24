@@ -22,3 +22,34 @@ x_connect (const char *displayname, int *screenp)//@;
   return result;
 }
 } //@
+
+//@ #include <xcb/xcb.h>
+//@ namespace libsh_treis::xcb
+//@ {
+//@ class connection
+//@ {
+//@   xcb_connection_t *_connection;
+
+//@ public:
+
+//@   connection (const char *displayname, int *screenp) : _connection (libsh_treis::xcb::no_raii::x_connect (displayname, screenp))
+//@   {
+//@   }
+
+//@   connection (connection &&) = delete;
+//@   connection (const connection &) = delete;
+//@   connection &operator= (connection &&) = delete;
+//@   connection &operator= (const connection &) = delete;
+
+//@   ~connection (void)
+//@   {
+//@     xcb_disconnect (_connection);
+//@   }
+
+//@   xcb_connection_t *
+//@   get (void) const noexcept
+//@   {
+//@     return _connection;
+//@   }
+//@ };
+//@ }
