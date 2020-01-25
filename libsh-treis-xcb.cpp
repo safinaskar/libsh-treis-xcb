@@ -11,6 +11,7 @@ namespace libsh_treis::xcb::no_raii //@
 xcb_connection_t * //@
 x_connect (const char *displayname, int *screenp)//@;
 {
+  // Документация на xcb_connect и её код подтверждают, что xcb_connect не возвращает nullptr
   xcb_connection_t *result = xcb_connect (displayname, screenp);
 
   if (xcb_connection_has_error (result) != 0)
