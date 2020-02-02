@@ -27,7 +27,7 @@ x_connect (const char *displayname, int *screenp)//@;
 //@ #include <xcb/xcb.h>
 //@ namespace libsh_treis::xcb
 //@ {
-//@ class connection
+//@ class connection: libsh_treis::not_movable
 //@ {
 //@   xcb_connection_t *_connection;
 
@@ -36,11 +36,6 @@ x_connect (const char *displayname, int *screenp)//@;
 //@   connection (const char *displayname, int *screenp) : _connection (libsh_treis::xcb::no_raii::x_connect (displayname, screenp))
 //@   {
 //@   }
-
-//@   connection (connection &&) = delete;
-//@   connection (const connection &) = delete;
-//@   connection &operator= (connection &&) = delete;
-//@   connection &operator= (const connection &) = delete;
 
 //@   ~connection (void)
 //@   {
@@ -51,6 +46,56 @@ x_connect (const char *displayname, int *screenp)//@;
 //@   get (void) const noexcept
 //@   {
 //@     return _connection;
+//@   }
+//@ };
+//@ }
+
+//@ #include <stdint.h>
+//@ #include <xcb/xcb.h>
+//@ #include <xcb/xcb_image.h>
+namespace libsh_treis::xcb::no_raii //@
+{ //@
+xcb_image_t * //@
+x_image_get (xcb_connection_t *conn, xcb_drawable_t draw, int16_t x, int16_t y, uint16_t width, uint16_t height, uint32_t plane_mask, xcb_image_format_t format)//@;
+{
+  xcb_image_t *result = xcb_image_get (conn, draw, x, y, width, height, plane_mask, format);
+
+  if (result == nullptr)
+    {
+      _LIBSH_TREIS_THROW_MESSAGE ("Failed");
+    }
+
+  return result;
+}
+} //@
+
+//@ #include <stdint.h>
+//@ #include <xcb/xcb.h>
+//@ #include <xcb/xcb_image.h>
+//@ namespace libsh_treis::xcb
+//@ {
+//@ struct x_image_get_tag
+//@ {
+//@ };
+//@ class image: libsh_treis::not_movable
+//@ {
+//@   xcb_image_t *_image;
+
+//@ public:
+
+//@   image (x_image_get_tag, xcb_connection_t *conn, xcb_drawable_t draw, int16_t x, int16_t y, uint16_t width, uint16_t height, uint32_t plane_mask, xcb_image_format_t format) : _image (libsh_treis::xcb::no_raii::x_image_get (conn, draw, x, y, width, height, plane_mask, format))
+//@   {
+//@   }
+
+//@   ~image (void)
+//@   {
+//@     xcb_image_destroy (_image);
+//@   }
+
+//@   xcb_image_t *
+//@   get (void) const noexcept
+//@   {
+//@     return _image;
 //@   }
 //@ };
 //@ }
