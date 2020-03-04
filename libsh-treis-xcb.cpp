@@ -27,7 +27,7 @@ x_connect (const char *displayname, int *screenp)//@;
 //@ #include <xcb/xcb.h>
 //@ namespace libsh_treis::xcb
 //@ {
-//@ class connection: libsh_treis::not_movable
+//@ class connection: libsh_treis::tools::not_movable
 //@ {
 //@   xcb_connection_t *_connection;
 
@@ -77,7 +77,7 @@ x_image_get (xcb_connection_t *conn, xcb_drawable_t draw, int16_t x, int16_t y, 
 //@ struct x_image_get_tag
 //@ {
 //@ };
-//@ class image: libsh_treis::not_movable
+//@ class image: libsh_treis::tools::not_movable
 //@ {
 //@   xcb_image_t *_image;
 
