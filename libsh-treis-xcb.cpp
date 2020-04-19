@@ -31,14 +31,11 @@ x_connect (const char *displayname, int *screenp)//@;
 //@ {
 //@   xcb_connection_t *_connection;
 
+//@ public:
+
 //@   explicit connection (xcb_connection_t *conn) noexcept : _connection (conn)
 //@   {
 //@   }
-
-//@   friend connection
-//@   x_connect (const char *displayname, int *screenp);
-
-//@ public:
 
 //@   ~connection (void)
 //@   {
@@ -90,14 +87,11 @@ x_image_get (xcb_connection_t *conn, xcb_drawable_t draw, int16_t x, int16_t y, 
 //@ {
 //@   xcb_image_t *_image;
 
+//@ public:
+
 //@   explicit image (xcb_image_t *im) noexcept : _image (im)
 //@   {
 //@   }
-
-//@   friend image
-//@   x_image_get (xcb_connection_t *conn, xcb_drawable_t draw, int16_t x, int16_t y, uint16_t width, uint16_t height, uint32_t plane_mask, xcb_image_format_t format);
-
-//@ public:
 
 //@   ~image (void)
 //@   {
