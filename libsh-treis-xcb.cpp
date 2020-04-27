@@ -43,7 +43,7 @@ x_connect (const char *displayname, int *screenp)//@;
 //@   }
 
 //@   xcb_connection_t *
-//@   get (void) const noexcept
+//@   resource (void) const noexcept
 //@   {
 //@     return _connection;
 //@   }
@@ -99,7 +99,7 @@ x_image_get (xcb_connection_t *conn, xcb_drawable_t draw, int16_t x, int16_t y, 
 //@   }
 
 //@   xcb_image_t *
-//@   get (void) const noexcept
+//@   resource (void) const noexcept
 //@   {
 //@     return _image;
 //@   }
