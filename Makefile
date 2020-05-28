@@ -1,14 +1,12 @@
 export
 
 CXX ?= c++
+AR ?= ar
 CPPFLAGS ?= -DNDEBUG
 CXXFLAGS ?= -O3 -g -Wall -Wextra -pedantic
 LDFLAGS ?=
 
-all: libsh-treis-xcb.o FORCE
-	rm -f libsh-treis/stamp
-	$(MAKE) -C libsh-treis
-	[ -f libsh-treis/stamp ] && touch stamp || :
+all: lib.a
 
 FORCE:
 
@@ -20,4 +18,9 @@ libsh-treis-xcb.hpp: libsh-treis-xcb.cpp
 
 libsh-treis-xcb.o: libsh-treis-xcb.cpp libsh-treis-xcb.hpp libsh-treis/libsh-treis.hpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -std=c++2a -c $<
-	touch stamp
+
+libsh-treis/lib.a: FORCE
+	$(MAKE) -C libsh-treis lib.a
+
+lib.a: libsh-treis-xcb.o libsh-treis/lib.a
+	cp libsh-treis/lib.a $@ && $(AR) rsD $@ libsh-treis-xcb.o || { rm -f $@; exit 1; }

@@ -1,6 +1,6 @@
 .*.kate-swp
 
 *.o
+*.a
 
 /libsh-treis-xcb.hpp
-/stamp
