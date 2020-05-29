@@ -18,7 +18,7 @@ libsh-treis/%: FORCE
 libsh-treis-xcb.hpp: libsh-treis-xcb.cpp
 	grep '//@' $< | sed 's~ *//@\( \|\)~~' > $@
 
-libsh-treis-xcb.o: libsh-treis-xcb.cpp
+libsh-treis-xcb.o: libsh-treis-xcb.cpp FORCE
 	libsh-treis/compile $< $(CXX) $(CPPFLAGS) $(CXXFLAGS) -std=c++2a
 
 lib.a: libsh-treis-xcb.o libsh-treis/lib.a
