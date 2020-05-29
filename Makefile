@@ -13,7 +13,7 @@ all: lib.a
 FORCE:
 
 libsh-treis/%: FORCE
-	T='$@'; $(MAKE) -C libsh-treis "$${T#*/}"
+	T='$@'; $(MAKE) -C "$${T%%/*}" "$${T#*/}"
 
 libsh-treis-xcb.hpp: libsh-treis-xcb.cpp
 	grep '//@' $< | sed 's~ *//@\( \|\)~~' > $@
