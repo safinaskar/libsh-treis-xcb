@@ -16,7 +16,7 @@ libsh-treis/%: FORCE
 	T='$@'; $(MAKE) -C "$${T%%/*}" "$${T#*/}"
 
 libsh-treis-xcb.hpp: libsh-treis-xcb.cpp
-	grep '//@' $< | sed 's~ *//@\( \|\)~~' > $@
+	grep -E '//@' $< | sed -E 's~ *//@ ?~~' > $@
 
 libsh-treis-xcb.o: libsh-treis-xcb.cpp FORCE
 	libsh-treis/compile '$(MAKE)' $< $(CXX) $(CPPFLAGS) $(CXXFLAGS) -std=c++2a
