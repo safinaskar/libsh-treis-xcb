@@ -1,1 +1,1 @@
--lxcb -lxcb-image
+-lxcb-image -lxcb -lXau -lxcb-shm -lxcb -lXau -lXdmcp
